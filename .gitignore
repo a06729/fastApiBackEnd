@@ -2,4 +2,6 @@ images/*.jpeg
 images/*.png
 lipsImages/*.jpeg
 lipsImages/*.png
+__pycache__
+router/__pycache__
 .env

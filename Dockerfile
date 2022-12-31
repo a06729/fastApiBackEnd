@@ -21,13 +21,15 @@ WORKDIR /app
 COPY ./* /app/
 COPY ./router/* /app/router/
 
+RUN mkdir -p /app/images
+RUN mkdir -p /app/lipsImages
+
 RUN pip3.11 install --no-cache-dir --upgrade -r /app/requirements.txt
 
 RUN groupadd -g "${GID}" python \
   && useradd --create-home --no-log-init -u "${UID}" -g "${GID}" python
 
-RUN mkdir -p /app/images
-RUN mkdir -p /app/lipsImages
+
 
 
 USER python:python

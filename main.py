@@ -1,19 +1,32 @@
 from typing import Union
 
-import uuid
 from router.fileApi import router as fileRouter
-from fastapi import FastAPI,UploadFile
-from starlette.responses import FileResponse
+from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
+import os
 
+# import uuid
+# import cv2
+# import lips
 
-import cv2
-import lips
+def dirCreate():
+    try:
+        if not os.path.exists('images'):
+            os.makedirs('images')
+        if not os.path.exists('lipsImages'):
+            os.makedirs('lipsImages')
+    except OSError:
+        print ('Error: Creating directory.')
+        
+#프로그램 시작전 폴더생성
+dirCreate()
 
 app = FastAPI()
+
+#파일 접근 가능하도록 추가
 app.mount("/images", StaticFiles(directory="images"), name="images")
 
-
+#api 라우터 추가
 app.include_router(fileRouter,prefix='/file')
 
 @app.get("/")
@@ -47,3 +60,5 @@ def read_root():
 #         lipsFileResult=lips.imglips(saveFileName=saveFileName,img=img)
 
 #     return FileResponse(lipsFileResult['fileLocation'], media_type='application/octet-stream',filename=lipsFileResult['fileName'])
+
+        

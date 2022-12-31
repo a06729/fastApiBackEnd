@@ -24,6 +24,10 @@ COPY ./router/* /app/router/
 RUN mkdir -p /app/images
 RUN mkdir -p /app/lipsImages
 
+RUN chmod -R 777 /app/images
+RUN chmod -R 777 /app/lipsImages
+
+
 RUN pip3.11 install --no-cache-dir --upgrade -r /app/requirements.txt
 
 RUN groupadd -g "${GID}" python \

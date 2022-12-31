@@ -34,10 +34,12 @@ async def uploadImage(file: UploadFile,status_code=status.HTTP_201_CREATED):
     file_name=f'{uuid.uuid4()}-{file.filename}'
     
     #원본이미지 저장할 위치 변수
-    file_location=fr"{re_Image_path}{file_name}"
-    print(file_location)
+    # file_location=fr"{re_Image_path}{file_name}"
+    file_location=os.path.join(re_Image_path,file_name)
     
-    with open(file_location,"wb+") as file_object:
+    logger.info(file_location)
+    
+    with open(file_location,"wb") as file_object:
         file_object.write(await file.read())
     
     return {

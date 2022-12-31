@@ -45,7 +45,7 @@ def imglips(saveFileName,img,savePath):
             cv2.imwrite(f'{savePath}{saveFileName}',imgClorLips)
             return {
                 'status':True,
-                'fileLocation':f'{savePath}{saveFileName}',
+                'fileLocation':fr'{savePath}{saveFileName}',
                 'fileName':saveFileName
             }
     else:

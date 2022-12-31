@@ -1,0 +1,5 @@
+images/*.jpeg
+images/*.png
+lipsImages/*.jpeg
+lipsImages/*.png
+.env

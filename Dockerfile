@@ -1,5 +1,8 @@
 FROM python:3.11
 
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED 1
+
 ARG UID=1000
 ARG GID=1000
 
@@ -19,5 +22,10 @@ COPY ./* /app/
 COPY ./router/* /app/router/
 
 RUN pip3.11 install --no-cache-dir --upgrade -r /app/requirements.txt
+
+RUN groupadd -g "${GID}" python \
+  && useradd --create-home --no-log-init -u "${UID}" -g "${GID}" python
+
+USER python:python
 
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -46,7 +46,7 @@ async def uploadImage(file: UploadFile,status_code=status.HTTP_201_CREATED):
         'status_code':status_code,#http 상태값 리턴
         're_file_location':file_location,#파일이미지 상대경로
         'fileName':file_name,
-        "imgUrl":f'{host_name}{ab_Image_path}{file.filename}'#이미지 파일 위치 리턴
+        "imgUrl":f'{host_name}{ab_Image_path}{file_name}'#이미지 파일 위치 리턴
     }
 #원본이미지 립스틱 색 칠하는 라우터
 @router.post("/ImageLips")

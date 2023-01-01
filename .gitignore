@@ -1,7 +1,10 @@
 images/*.jpeg
 images/*.png
+images/*.webp
 lipsImages/*.jpeg
 lipsImages/*.png
+lipsImages/*.webp
+
 __pycache__
 router/__pycache__
 .env

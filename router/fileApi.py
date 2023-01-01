@@ -45,16 +45,16 @@ async def uploadImage(file: UploadFile,status_code=status.HTTP_201_CREATED):
     return {
         'status_code':status_code,#http 상태값 리턴
         're_file_location':file_location,#파일이미지 상대경로
-        'fileName':file_name,
+        'fileName':file_name,#파일 이름
         "imgUrl":f'{host_name}{ab_Image_path}{file_name}'#이미지 파일 위치 리턴
     }
 #원본이미지 립스틱 색 칠하는 라우터
 @router.post("/ImageLips")
 async def ImageLips(
              imageName:Union[str, None] = None,
-             B: Union[int, None] = None,
-             G: Union[int, None] = None,
-             R: Union[int, None] = None):
+             B: Union[int, None] = 153,
+             G: Union[int, None] = 0,
+             R: Union[int, None] = 157):
     
     #이미지 파일에 립스틱 색 색칠후 정보 저장하는 객체
     lipsFileResult={}
@@ -73,7 +73,12 @@ async def ImageLips(
     #이미지를 opencv로 읽어온다.
     img=cv2.imread(imagePath)
     #이미지처리한 결과값 딕셔너리 객체로 정보를 리턴해 준다.
-    lipsFileResult=lips.imglips(saveFileName=saveFileName,img=img,savePath=lipsImagePath)
+    lipsFileResult=lips.imglips(
+            saveFileName=saveFileName,
+            img=img,
+            savePath=lipsImagePath,
+            BGR=(B,G,R)
+        )
 
     #이미지에 얼굴을 인식하면 status값이 True로 리턴된다.
     if lipsFileResult['status']==True:

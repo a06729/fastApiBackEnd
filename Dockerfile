@@ -24,6 +24,7 @@ COPY ./router/* /app/router/
 RUN mkdir -p /app/images
 RUN mkdir -p /app/lipsImages
 
+#읽기 쓰기 권한 추가
 RUN chmod -R 777 /app/images
 RUN chmod -R 777 /app/lipsImages
 
@@ -32,9 +33,6 @@ RUN pip3.11 install --no-cache-dir --upgrade -r /app/requirements.txt
 
 RUN groupadd -g "${GID}" python \
   && useradd --create-home --no-log-init -u "${UID}" -g "${GID}" python
-
-
-
 
 USER python:python
 

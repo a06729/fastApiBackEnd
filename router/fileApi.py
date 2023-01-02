@@ -1,6 +1,6 @@
 import os
 from fastapi import APIRouter
-from fastapi import UploadFile,status,HTTPException
+from fastapi import UploadFile,HTTPException
 from dotenv import load_dotenv
 from typing import Union
 from starlette.responses import FileResponse
@@ -26,7 +26,7 @@ load_dotenv(os.path.join(BASE_DIR, ".env"))
 
 #원본파일 이미지 저장
 @router.post("/uploadImage")
-async def uploadImage(file: UploadFile,status_code=status.HTTP_201_CREATED):
+async def uploadImage(file: UploadFile):
     
     #호스트이름 .env 파일에서 HOST_NAME 키값으로 가져온다.
     host_name= os.environ["HOST_NAME"]
@@ -43,7 +43,6 @@ async def uploadImage(file: UploadFile,status_code=status.HTTP_201_CREATED):
         file_object.write(await file.read())
     
     return {
-        'status_code':status_code,#http 상태값 리턴
         're_file_location':file_location,#파일이미지 상대경로
         'fileName':file_name,#파일 이름
         "imgUrl":f'{host_name}{ab_Image_path}{file_name}'#이미지 파일 위치 리턴

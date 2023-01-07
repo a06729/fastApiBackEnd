@@ -28,6 +28,8 @@ app = FastAPI()
 
 #파일 접근 가능하도록 추가
 app.mount("/images", StaticFiles(directory="images"), name="images")
+app.mount("/lipsImages", StaticFiles(directory="lipsImages"), name="lipsImages")
+
 
 #api 라우터 추가
 app.include_router(fileRouter,prefix='/file')

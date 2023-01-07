@@ -55,6 +55,9 @@ async def ImageLips(
              G: Union[int, None] = 0,
              R: Union[int, None] = 157):
     
+    host_name= os.environ["HOST_NAME"]
+
+    
     #이미지 파일에 립스틱 색 색칠후 정보 저장하는 객체
     lipsFileResult={}
     
@@ -81,7 +84,8 @@ async def ImageLips(
 
     #이미지에 얼굴을 인식하면 status값이 True로 리턴된다.
     if lipsFileResult['status']==True:
-        return FileResponse(lipsFileResult['fileLocation'], media_type='application/octet-stream',filename=lipsFileResult['fileName'])
+        return {"imgUrl":f'{host_name}/lipsImages/{saveFileName}'}
+        # return FileResponse(lipsFileResult['fileLocation'], media_type='application/octet-stream',filename=lipsFileResult['fileName'])
     else:
         logger.info("이미지에서 얼굴을 찾을수 없습니다.")
         raise HTTPException(status_code=404, detail="이미지에서 얼굴을 찾을수 없습니다.")

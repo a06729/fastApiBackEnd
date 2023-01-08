@@ -5,6 +5,8 @@ from dotenv import load_dotenv
 from typing import Union
 from starlette.responses import FileResponse
 from loguru import logger
+import shortuuid
+
 
 
 import cv2
@@ -31,7 +33,7 @@ async def uploadImage(file: UploadFile):
     #호스트이름 .env 파일에서 HOST_NAME 키값으로 가져온다.
     host_name= os.environ["HOST_NAME"]
     #원본파일 이름 뒤에 uuid를 넣어서 파일이름 겹치는걸 방지
-    file_name=f'{uuid.uuid4()}-{file.filename}'
+    file_name=f'{shortuuid.ShortUUID().random(length=10)}-{file.filename}'
     
     #원본이미지 저장할 위치 변수
     # file_location=fr"{re_Image_path}{file_name}"
@@ -67,7 +69,7 @@ async def ImageLips(
     lipsImagePath=f'{os.path.join(BASE_DIR,"lipsImages/")}'
     
     #저장할 파일이름
-    saveFileName=f"{uuid.uuid4()}-{imageName}"
+    saveFileName=f"{shortuuid.ShortUUID().random(length=10)}-{imageName}"
     
     logger.debug(imagePath)
     logger.debug(lipsImagePath)
@@ -88,4 +90,4 @@ async def ImageLips(
         # return FileResponse(lipsFileResult['fileLocation'], media_type='application/octet-stream',filename=lipsFileResult['fileName'])
     else:
         logger.info("이미지에서 얼굴을 찾을수 없습니다.")
-        raise HTTPException(status_code=404, detail="이미지에서 얼굴을 찾을수 없습니다.")
+        raise HTTPException(status_code=410, detail="이미지에서 얼굴을 찾을수 없습니다.")

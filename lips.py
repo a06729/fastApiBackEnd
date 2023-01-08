@@ -45,7 +45,7 @@ def imglips(saveFileName,img,savePath,BGR:tuple):
             
             imgClorLips=cv2.bitwise_and(imgLips,imgClorLips)
             imgClorLips=cv2.GaussianBlur(imgClorLips,(7,7),10)
-            imgClorLips=cv2.addWeighted(imgOriginal,1,imgClorLips,0.35,0)
+            imgClorLips=cv2.addWeighted(imgOriginal,1,imgClorLips,0.4,0.4)
             
             
             cv2.imwrite(f'{savePath}{saveFileName}',imgClorLips)

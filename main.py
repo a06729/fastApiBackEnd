@@ -5,6 +5,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 import os
 from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
 
 
 # import uuid
@@ -24,6 +25,11 @@ def dirCreate():
 #프로그램 시작전 폴더생성
 dirCreate()
 
+
+load_dotenv()
+#.env의 HOST_NAEM 값 가져옴
+HOST_NAME=os.environ.get('HOST_NAME')
+
 app = FastAPI()
 
 #파일 접근 가능하도록 추가
@@ -38,6 +44,7 @@ origins = [
     "http://localhost",
     "http://localhost:8080",
     "http://localhost:3000",
+     HOST_NAME
 ]
 
 app.add_middleware(

@@ -1,5 +1,3 @@
-from typing import Union
-
 from router.fileApi import router as fileRouter
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles

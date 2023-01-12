@@ -1,9 +1,11 @@
 images/*.jpeg
 images/*.png
 images/*.webp
+images/*.jpg
 lipsImages/*.jpeg
 lipsImages/*.png
 lipsImages/*.webp
+lipsImages/*.jpg
 
 __pycache__
 router/__pycache__
